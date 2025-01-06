@@ -1,0 +1,5 @@
+"Sid","test123","Siddharth","Grover","gro0003@email.com","0","2005-05-04","12I"
+"Student","test123","Student","Doe","doe0001@email.com","0","2003-06-14","11A"
+"Parent","test123","Parent","Doe","doe0003@email.com","1","Sid"
+"Teacher","test123","Teacher","Doe","doe0002@gemail.com","2"
+"Admin","test123","Admin","Doe","doe0004@email.com","3"

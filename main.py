@@ -11,9 +11,9 @@ import math
 import csv
 
 # Filepaths
-DATA_FILE = "data.csv"
-ROLL_FILE = "roll.csv"
-NOTES_FILE = "notes.csv"
+DATA_FILE = "data/data.csv"
+ROLL_FILE = "data/roll.csv"
+NOTES_FILE = "data/notes.csv"
 
 # Scale factor to support dynamic scaling
 scale_factor = ctypes.windll.shcore.GetScaleFactorForDevice(0) / 100
