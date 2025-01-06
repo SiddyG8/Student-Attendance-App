@@ -10,6 +10,11 @@ import ctypes
 import math
 import csv
 
+# Filepaths
+DATA_FILE = "data.csv"
+ROLL_FILE = "roll.csv"
+NOTES_FILE = "notes.csv"
+
 # Scale factor to support dynamic scaling
 scale_factor = ctypes.windll.shcore.GetScaleFactorForDevice(0) / 100
 
@@ -479,7 +484,7 @@ class Student(User):
         status = 0
 
         # Read data from roll file
-        with open("roll.csv") as rollFile:
+        with open(ROLL_FILE) as rollFile:
             reader = csv.reader(rollFile)
             for row in reader:
                 if row[0] == self.username and dt.date.fromisoformat(row[2]) == today:
@@ -491,7 +496,7 @@ class Student(User):
     @property
     def notes(self):
         notes = {}
-        with open("notes.csv") as notesFile:
+        with open(NOTES_FILE) as notesFile:
             reader = csv.reader(notesFile)
             for row in reader:
                 if row[0] == self.username:
@@ -509,7 +514,7 @@ class Student(User):
 
         # Read roll from file
         states = {}
-        with open("roll.csv") as rollFile:
+        with open(ROLL_FILE) as rollFile:
             reader = csv.reader(rollFile)
             for row in reader:
                 date = dt.date.fromisoformat(row[2])
@@ -526,7 +531,7 @@ class Student(User):
 
     @classmethod
     def fromParent(cls, child):
-        with open("data.csv") as dataFile:
+        with open(DATA_FILE) as dataFile:
             reader = csv.reader(dataFile)
             for row in reader:
                 if row[0] == child:
@@ -644,7 +649,7 @@ class ChangePassword(CTkToplevel):
             # Reading old data
             oldData = []
             userData = []
-            with open("data.csv") as dataFile:
+            with open(DATA_FILE) as dataFile:
                 reader = csv.reader(dataFile)
                 for row in reader:
                     if row[0] == user.username:
@@ -655,7 +660,7 @@ class ChangePassword(CTkToplevel):
             # Writing new data
             user.password = password
             userData[1] = user.password
-            with open("data.csv", "w") as dataFile:
+            with open(DATA_FILE, "w") as dataFile:
                 writer = csv.writer(dataFile, quoting=csv.QUOTE_ALL, lineterminator="\n")
                 for row in oldData:
                     writer.writerow(row)
@@ -791,7 +796,7 @@ class CreateNote(CTkToplevel):
 
         # Reading old data
         oldData = []
-        with open("notes.csv") as rollFile:
+        with open(NOTES_FILE) as rollFile:
             reader = csv.reader(rollFile)
             for row in reader:
                 oldData.append(row)
@@ -812,7 +817,7 @@ class CreateNote(CTkToplevel):
         else:
             # Writing new data
             noteData = [self.student.username, title, content[:-1]]
-            with open("notes.csv", "w") as rollFile:
+            with open(NOTES_FILE, "w") as rollFile:
                 writer = csv.writer(rollFile, quoting=csv.QUOTE_ALL, lineterminator="\n")
                 for row in oldData:
                     writer.writerow(row)
@@ -1419,14 +1424,14 @@ class EditAttendance(CTkToplevel):
     def save(self):
         # Reading old data
         oldData = []
-        with open("roll.csv") as rollFile:
+        with open(ROLL_FILE) as rollFile:
             reader = csv.reader(rollFile)
             for row in reader:
                 if not self.start <= dt.date.fromisoformat(row[2]) <= self.end:
                     oldData.append(row)
 
         # Writing new data
-        with open("roll.csv", "w") as rollFile:
+        with open(ROLL_FILE, "w") as rollFile:
             writer = csv.writer(rollFile, quoting=csv.QUOTE_ALL, lineterminator="\n")
             for row in oldData:
                 writer.writerow(row)
@@ -1486,14 +1491,14 @@ class EditAttendance(CTkToplevel):
 
             # Reading old data
             oldData = []
-            with open("notes.csv") as noteFile:
+            with open(NOTES_FILE) as noteFile:
                 reader = csv.reader(noteFile)
                 for row in reader:
                     if row[1] != noteTitle:
                         oldData.append(row)
 
             # Writing new data
-            with open("notes.csv", "w") as noteFile:
+            with open(NOTES_FILE, "w") as noteFile:
                 writer = csv.writer(noteFile, quoting=csv.QUOTE_ALL, lineterminator="\n")
                 for row in oldData:
                     writer.writerow(row)
@@ -1674,7 +1679,7 @@ class LoginScreen(CTkFrame):
 
         if username and password:
             result = False
-            with open("data.csv") as dataFile:
+            with open(DATA_FILE) as dataFile:
                 reader = csv.reader(dataFile)
                 for row in reader:
                     if row[0] == username and row[1] == password:
@@ -2597,7 +2602,7 @@ class TeacherScreen(CTkFrame):
             return None
 
         temp = {}
-        with open("data.csv") as dataFile:
+        with open(DATA_FILE) as dataFile:
             reader = csv.reader(dataFile)
             for row in reader:
                 if int(row[5]) == 0:
@@ -2846,7 +2851,7 @@ class AdminScreen(CTkFrame):
             return None
 
         temp = {}
-        with open("data.csv") as dataFile:
+        with open(DATA_FILE) as dataFile:
             reader = csv.reader(dataFile)
             for row in reader:
                 if int(row[5]) == 0:
