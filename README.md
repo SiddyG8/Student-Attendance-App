@@ -4,14 +4,12 @@ This is a simple student attendance app that allows teachers to take attendance 
 The app is built using Python and CustomTkinter.
 The app allows teachers to add students to the system, take attendance, and view attendance reports.
 The app also allows teachers to save and load attendance data to and from a file and create attendance notes.
-Admins can also edit student information.
 
 ## Features
 
 - Add, view, and remove students from the system
 - Take attendance, view attendance reports and edit attendance data
 - Record attendance notes for each student
-- Edit student information (including notes)
 
 ## Installation
 
