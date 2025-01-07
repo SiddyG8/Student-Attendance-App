@@ -14,13 +14,14 @@ The app also allows teachers to save and load attendance data to and from a file
 ## Installation
 
 1. Clone the repository
-2. Install the required dependencies using the following command:
+2. Create a virtual environment using the appropiate commands for your OS
+3. Install the required dependencies using the following command:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-3. Run the app using the following command:
+4. Run the app using the following command:
 
     ```bash
     python main.py
